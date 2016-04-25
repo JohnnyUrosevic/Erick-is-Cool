@@ -23,6 +23,7 @@ var ram_head = "http://i.imgur.com/fMgakDZ.png";
 var ram_mode = false;
 var heart_mode = false;
 var main_song = document.getElementById("main_song"); 
+var num_heads = 1;
 // Get canvas offset
 var offset = {
     x: rect.left,
@@ -76,6 +77,8 @@ var update_array = function(list){
 window.onmousedown = function(e) {
     // IE doesn't always have e here
     e = e || window.event;
+    num_heads += heads_per_click;
+  
     var location = {
         x: e.pageX - offset.x,
         y: e.pageY - offset.y
@@ -90,28 +93,43 @@ function cheat_code(cheat, func){
     this.func = func; 
 }
 //Codes
-var konami = new cheat_code("38384040373937396665", function(){konami_mode = true; 
-                                                               FPS *= 10; 
-                                                               konami_boost *= 100;
-                                                               clearInterval(main_loop);
-                                                               main_loop = setInterval(tick, 1000 / FPS);});
+var konami = new cheat_code("38384040373937396665", function(){
+		konami_mode = true; 
+		FPS *= 10; 
+		konami_boost *= 100;
+		clearInterval(main_loop);
+		main_loop = setInterval(tick, 1000 / FPS);
+	}
+);
 var hydra = new cheat_code("7289688265", function(){heads_per_click += 5;});
-var vidya = new cheat_code("8673688965", function(){alert("Starting awesome secret game...");
-                                                   alert("ERROR NOT ENOUGH RAM.\nLinking you to download more ram...");
-                                                        window.open("http://upload.wikimedia.org/wikipedia/commons/8/80/Bighorn_ram_animal_ovis_canadensis.jpg");
-                                                    ram_mode = true;
-                                                    for(var i = 0; i < heads.length; i++){heads[i].img.src=ram_head;
-                                                                                         heads[i].width=200;
-                                                                                         heads[i].height=141;}
-                                                                                         clearInterval(main_loop);
-                                                               main_loop = setInterval(tick, 1000 / FPS);});
+var vidya = new cheat_code("8673688965", function(){
+	alert("Starting awesome secret game...");
+    alert("ERROR NOT ENOUGH RAM.\nLinking you to download more ram...");
+    window.open("http://upload.wikimedia.org/wikipedia/commons/8/80/Bighorn_ram_animal_ovis_canadensis.jpg");
+    ram_mode = true;
+    for(var i = 0; i < heads.length; i++){
+		heads[i].img.src=ram_head;
+		heads[i].width=200;
+		heads[i].height=141;
+	}
+	clearInterval(main_loop);
+	main_loop = setInterval(tick, 1000 / FPS);
+	}
+);
 var spin = new cheat_code("7769658483807378", function(){spin_boost *= 10;});
-var love = new cheat_code("6982736775886765897665" , function(){for(var i = 0; i < heads.length; i++){
-  heads[i].img.src="http://i.imgur.com/X7V1pcL.png";
-heart_mode=true;}});
+var love = new cheat_code("6982736775886765897665" , function(){
+	for(var i = 0; i < heads.length; i++){
+        heads[i].img.src="http://i.imgur.com/X7V1pcL.png";
+		heart_mode=true;
+		}
+	}
+);
 var cotton = new cheat_code("677984847978", function(){
-  main_song.setAttribute('src','http://eros.vlo.gda.pl/~mrproper/Rednex%20-%20Cotton%20Eyed%20Joe.mp3');
-  main_song.pause(); main_song.play();});
+	main_song.setAttribute('src','http://eros.vlo.gda.pl/~mrproper/Rednex%20-%20Cotton%20Eyed%20Joe.mp3');
+	main_song.pause(); 
+	main_song.play();
+	}
+ );
 //Code array
 var codes = [konami, hydra, vidya, spin, love, cotton];
 //Check codes
@@ -165,7 +183,11 @@ function draw_rainbow() {
 var draw_text = function(){
     ctx.font=getFont(150, 'Comic Sans MS');
     ctx.textAlign = "center";
-    ctx.fillText("Erick is cool", midx, midy - 100);
+    ctx.fillText("Erick is Cool", midx, midy - 100);
+    
+  
+    ctx.font=getFont(50, 'Comic Sans MS');
+    ctx.fillText("Number of Ericks: " + num_heads, midx, canvas.height / 10);
 };
 //Create heads
 function head(x, y, vx, vy, dir) {
@@ -192,18 +214,17 @@ function head(x, y, vx, vy, dir) {
        this.height = 192;
   }
   this.draw= function() {
- drawImageRot(this.img,this.x,this.y,this.width,this.height,this.rotation);
+	drawImageRot(this.img,this.x,this.y,this.width,this.height,this.rotation);
   };
   this.update = function() {
-        
         this.x += (this.vx * konami_boost) / FPS;
         this.y += (this.vy * konami_boost) / FPS;
         // Collision detection
-        if ( this.x < 0 ) {
+        if (this.x < 0) {
             this.x = 0;
             this.vx = -this.vx;
         }
-        if ( this.x > canvas.width - this.width) {
+        if (this.x > canvas.width - this.width) {
             this.x = canvas.width - this.width;
             this.vx = -this.vx;
         }

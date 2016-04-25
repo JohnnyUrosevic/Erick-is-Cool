@@ -12,8 +12,8 @@ canvas { display:block; } /* To remove the scrollbars */
 </style>
 </head>
 <body>
-   <audio id="main_song" src="http://a.pomf.se/rjitux.wav" autoplay loop></audio> 
-  <canvas id="canvas"></canvas> 
+   <audio id="main_song" src="http://a.pomf.se/rjitux.wav" autoplay loop></audio>
+  <canvas id="canvas"></canvas>
 <script id="jsbin-javascript">
 //Erick is cool by Johnny Urosevic
 //Set up canvas
@@ -39,7 +39,7 @@ var spin_boost = 1;
 var ram_head = "http://i.imgur.com/fMgakDZ.png";
 var ram_mode = false;
 var heart_mode = false;
-var main_song = document.getElementById("main_song"); 
+var main_song = document.getElementById("main_song");
 // Get canvas offset
 var offset = {
     x: rect.left,
@@ -47,8 +47,8 @@ var offset = {
 };
 //Utilities
 function getFont(fontSize, font) {
-    var ratio = fontSize / fontBase;   
-    var size = canvas.width * ratio;   
+    var ratio = fontSize / fontBase;
+    var size = canvas.width * ratio;
     return (size|0) + 'px ' + font;
 }
 var neg_or_pos = function(){
@@ -59,7 +59,7 @@ var neg_or_pos = function(){
     return num;
 };
 function drawImageRot(img,x,y,width,height,deg){
-//Convert degrees to radian 
+//Convert degrees to radian
 var rad = deg * Math.PI / 180;
 
     //Set the origin to the center of the image
@@ -68,10 +68,10 @@ var rad = deg * Math.PI / 180;
     //Rotate the canvas around the origin
     ctx.rotate(rad);
 
-    //draw the image    
+    //draw the image
     ctx.drawImage(img,width / 2 * (-1),height / 2 * (-1),width,height);
 
-    //reset the canvas  
+    //reset the canvas
     ctx.rotate(rad * ( -1 ) );
     ctx.translate((x + width / 2) * (-1), (y + height / 2) * (-1));
 }
@@ -81,7 +81,7 @@ var randNum = function (min, max){
 var draw_array = function(list){
     for (var i = 0; i < list.length; i++) {
         list[i].draw();
-    }  
+    }
 };
 var update_array = function(list){
     for (var i = 0; i < list.length; i++) {
@@ -104,11 +104,11 @@ window.onmousedown = function(e) {
 //Cheat codes constructor
 function cheat_code(cheat, func){
     this.cheat = cheat;
-    this.func = func; 
+    this.func = func;
 }
 //Codes
-var konami = new cheat_code("38384040373937396665", function(){konami_mode = true; 
-                                                               FPS *= 10; 
+var konami = new cheat_code("38384040373937396665", function(){konami_mode = true;
+                                                               FPS *= 10;
                                                                konami_boost *= 100;
                                                                clearInterval(main_loop);
                                                                main_loop = setInterval(tick, 1000 / FPS);});
@@ -168,11 +168,11 @@ window.onkeydown = function(e) {
 };
 //Rainbow
 var colors = ['red','orange', 'yellow', 'green', 'blue', 'purple'];
-function draw_rainbow() {                            
+function draw_rainbow() {
     if(frame_counter){
-    dx = canvas.width / colors.length; 
-    for(var i = 0; i < colors.length; i++) {        
-      ctx.fillStyle = colors[i];         
+    dx = canvas.width / colors.length;
+    for(var i = 0; i < colors.length; i++) {
+      ctx.fillStyle = colors[i];
       ctx.fillRect(i * dx, 0, dx, canvas.height);
     }
     colors = colors.slice(1, colors.length).concat(colors.slice(0, 1));
@@ -212,7 +212,7 @@ function head(x, y, vx, vy, dir) {
  drawImageRot(this.img,this.x,this.y,this.width,this.height,this.rotation);
   };
   this.update = function() {
-        
+
         this.x += (this.vx * konami_boost) / FPS;
         this.y += (this.vy * konami_boost) / FPS;
         // Collision detection
@@ -234,7 +234,7 @@ function head(x, y, vx, vy, dir) {
         }
         this.rotation += 4 * dir * spin_boost;
     };
- 
+
 }
 //Set up first head
 main_head = new head(midx, midy, 200, 200, 1);
@@ -242,10 +242,10 @@ main_head = new head(midx, midy, 200, 200, 1);
 var heads = [main_head];
 //Create more heads
 var create_head = function(position){
-    vx = randNum(100, 200) * neg_or_pos(); 
+    vx = randNum(100, 200) * neg_or_pos();
     vy = randNum(100, 200) * neg_or_pos();
     dir = neg_or_pos();
-    heads.push(new head(position.x - 68 ,position.y - 92 ,vx,vy,dir)); 
+    heads.push(new head(position.x - 68 ,position.y - 92 ,vx,vy,dir));
 };
 //Display
 function draw() {
@@ -275,8 +275,8 @@ main_loop = setInterval(tick, 1000 / FPS);
   <title>Erick is cool</title>
 </head>
 <body>
-   <audio id="main_song" src="http://a.pomf.se/rjitux.wav" autoplay loop></audio> 
-  <canvas id="canvas"></canvas> 
+   <audio id="main_song" src="http://a.pomf.se/rjitux.wav" autoplay loop></audio>
+  <canvas id="canvas"></canvas>
 </body>
 </html></script>
 
@@ -309,7 +309,7 @@ var spin_boost = 1;
 var ram_head = "http://i.imgur.com/fMgakDZ.png";
 var ram_mode = false;
 var heart_mode = false;
-var main_song = document.getElementById("main_song"); 
+var main_song = document.getElementById("main_song");
 // Get canvas offset
 var offset = {
     x: rect.left,
@@ -317,8 +317,8 @@ var offset = {
 };
 //Utilities
 function getFont(fontSize, font) {
-    var ratio = fontSize / fontBase;   
-    var size = canvas.width * ratio;   
+    var ratio = fontSize / fontBase;
+    var size = canvas.width * ratio;
     return (size|0) + 'px ' + font;
 }
 var neg_or_pos = function(){
@@ -329,7 +329,7 @@ var neg_or_pos = function(){
     return num;
 };
 function drawImageRot(img,x,y,width,height,deg){
-//Convert degrees to radian 
+//Convert degrees to radian
 var rad = deg * Math.PI / 180;
 
     //Set the origin to the center of the image
@@ -338,10 +338,10 @@ var rad = deg * Math.PI / 180;
     //Rotate the canvas around the origin
     ctx.rotate(rad);
 
-    //draw the image    
+    //draw the image
     ctx.drawImage(img,width / 2 * (-1),height / 2 * (-1),width,height);
 
-    //reset the canvas  
+    //reset the canvas
     ctx.rotate(rad * ( -1 ) );
     ctx.translate((x + width / 2) * (-1), (y + height / 2) * (-1));
 }
@@ -351,7 +351,7 @@ var randNum = function (min, max){
 var draw_array = function(list){
     for (var i = 0; i < list.length; i++) {
         list[i].draw();
-    }  
+    }
 };
 var update_array = function(list){
     for (var i = 0; i < list.length; i++) {
@@ -374,11 +374,11 @@ window.onmousedown = function(e) {
 //Cheat codes constructor
 function cheat_code(cheat, func){
     this.cheat = cheat;
-    this.func = func; 
+    this.func = func;
 }
 //Codes
-var konami = new cheat_code("38384040373937396665", function(){konami_mode = true; 
-                                                               FPS *= 10; 
+var konami = new cheat_code("38384040373937396665", function(){konami_mode = true;
+                                                               FPS *= 10;
                                                                konami_boost *= 100;
                                                                clearInterval(main_loop);
                                                                main_loop = setInterval(tick, 1000 / FPS);});
@@ -438,11 +438,11 @@ window.onkeydown = function(e) {
 };
 //Rainbow
 var colors = ['red','orange', 'yellow', 'green', 'blue', 'purple'];
-function draw_rainbow() {                            
+function draw_rainbow() {
     if(frame_counter){
-    dx = canvas.width / colors.length; 
-    for(var i = 0; i < colors.length; i++) {        
-      ctx.fillStyle = colors[i];         
+    dx = canvas.width / colors.length;
+    for(var i = 0; i < colors.length; i++) {
+      ctx.fillStyle = colors[i];
       ctx.fillRect(i * dx, 0, dx, canvas.height);
     }
     colors = colors.slice(1, colors.length).concat(colors.slice(0, 1));
@@ -482,7 +482,7 @@ function head(x, y, vx, vy, dir) {
  drawImageRot(this.img,this.x,this.y,this.width,this.height,this.rotation);
   };
   this.update = function() {
-        
+
         this.x += (this.vx * konami_boost) / FPS;
         this.y += (this.vy * konami_boost) / FPS;
         // Collision detection
@@ -504,7 +504,7 @@ function head(x, y, vx, vy, dir) {
         }
         this.rotation += 4 * dir * spin_boost;
     };
- 
+
 }
 //Set up first head
 main_head = new head(midx, midy, 200, 200, 1);
@@ -512,10 +512,10 @@ main_head = new head(midx, midy, 200, 200, 1);
 var heads = [main_head];
 //Create more heads
 var create_head = function(position){
-    vx = randNum(100, 200) * neg_or_pos(); 
+    vx = randNum(100, 200) * neg_or_pos();
     vy = randNum(100, 200) * neg_or_pos();
     dir = neg_or_pos();
-    heads.push(new head(position.x - 68 ,position.y - 92 ,vx,vy,dir)); 
+    heads.push(new head(position.x - 68 ,position.y - 92 ,vx,vy,dir));
 };
 //Display
 function draw() {
